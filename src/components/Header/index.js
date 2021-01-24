@@ -43,7 +43,7 @@ const IdConfirm = styled.div`
   align-items: center;
   justify-content: center;
   p{
-    font-size: 12px;
+    font-size: 13px;
     display: flex;
     align-items: center;
     color: #fff;
