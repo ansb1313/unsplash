@@ -4,6 +4,9 @@ const initialState = {
 
     photos:[],
     searchResult:{},
+    topics:[],
+    topicPage:{},
+    topicPhotos:[]
 
 }
 
@@ -13,7 +16,10 @@ export const Action = {
 
         GET_PHOTOS:'GET_PHOTOS',
         SEARCH_PHOTOS:'SEARCH_PHOTOS',
-        UPDATE_STATE:'UPDATE_STATE'
+        UPDATE_STATE:'UPDATE_STATE',
+        GET_TOPICS:'GET_TOPICS',
+        GET_TOPIC_PAGE:'GET_TOPIC_PAGE',
+        GET_TOPIC_PHOTOS: 'GET_TOPIC_PHOTOS'
     },
 
     Creators:{
@@ -36,6 +42,27 @@ export const Action = {
             type:Action.Types.SEARCH_PHOTOS,
             payload
         }),
+
+        getTopics:(payload) => ({
+
+            type:Action.Types.GET_TOPICS,
+            payload
+
+        }),
+
+        getTopicPage:(payload) => ({
+
+            type:Action.Types.GET_TOPIC_PAGE,
+            payload
+
+        }),
+
+        getTopicPhotos:(payload) => ({
+
+            type:Action.Types.GET_TOPIC_PHOTOS,
+            payload
+
+        })
 
     }
 

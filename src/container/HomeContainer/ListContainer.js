@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import qs from 'qs'
 import {useDispatch, useSelector} from "react-redux";
 import {Action} from "../../redux/reducer";
-import SearchBox from "../../components/SearchBox";
 import PhotoList from "../../components/Photo/PhotoList";
 import Pagenation from "../../components/Pagenation";
+import Visual from "../../components/Visual";
 
 
 const ListContainer = ({location}) => {
@@ -34,8 +34,8 @@ const ListContainer = ({location}) => {
     return(
 
         <Container>
-            <PhotoList photos={photos}></PhotoList>
-            <Pagenation></Pagenation>
+            <Visual/>
+            <PhotoList photos={photos}/>
         </Container>
 
     )
@@ -44,7 +44,6 @@ const ListContainer = ({location}) => {
 
 const Container = styled.div`
     
-    padding-top: 30px;
   padding-bottom: 50px;
     
 `

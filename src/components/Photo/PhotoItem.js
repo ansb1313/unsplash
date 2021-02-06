@@ -13,6 +13,7 @@ const PhotoItem = ({user, urls}) => {
             <Desc>
                 <Avatar>
                     <img src={user.profile_image.medium} alt=""/>
+
                 </Avatar>
                 <div className="username">
                     {user.username}
@@ -58,6 +59,12 @@ const Avatar = styled.div`
       -webkit-border-radius: 50%;-moz-border-radius: 50%;border-radius: 50%;
       margin: 10px;
     }
+    
+`
+
+const AvatarBlank = styled.div`
+    
+    
     
 `
 

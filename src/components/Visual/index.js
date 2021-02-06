@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import VisualSearchBox from "../SearchBox/VisualSearchBox";
+import SearchBox from "../SearchBox";
 
 const Visual = () => {
 
     return(
 
-        <Container>
+        <Container className={"Visual"}>
             <VisualTitle>
                 <TextArea>
                     <h1>Unsplash</h1>
@@ -15,7 +15,7 @@ const Visual = () => {
                         Powered by creators everywhere.
                     </p>
                 </TextArea>
-                <VisualSearchBox></VisualSearchBox>
+                <SearchBox shape={"square"}/>
 
             </VisualTitle>
 
@@ -52,13 +52,13 @@ const Visual = () => {
 }
 
 const Container = styled.div`
-    margin-top: 94px;
     background: #eee;
+  margin-bottom: 30px;
     
 `
 const VisualTitle = styled.div`
     
-    max-width: 66.6666%;
+  max-width: 66.6666%;
   margin: 0 auto;
   padding: 144px 12px 152px 12px;
     

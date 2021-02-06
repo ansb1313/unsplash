@@ -8,6 +8,11 @@ export const GlobalStyle = createGlobalStyle`
     list-style: none;
     text-decoration: none;
     box-sizing: border-box;
+    
   }
-
+  
+  img {
+      max-width: 100%;
+      vertical-align:top;
+  }
 `

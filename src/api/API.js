@@ -17,6 +17,33 @@ const API = {
                 params:data
             })
         )
+    },
+
+    getTopics:(data) => {
+        return(
+            axios.get('https://api.unsplash.com/topics',{
+                params:data
+            })
+        )
+    },
+
+    getTopicPage:(data) => {
+
+        return(
+            axios.get(`https://api.unsplash.com/topics/${data.slug}`,{
+                params:data
+            })
+        )
+    },
+
+    getTopicPhotos:(data) => {
+
+        return(
+            axios.get(`https://api.unsplash.com/topics/${data.slug}/photos`,{
+                params:data
+            })
+        )
+
     }
 
 }

@@ -11,8 +11,7 @@ const App = () => {
 
         <Container>
             <GlobalStyle/>
-            <Header></Header>
-            <Visual></Visual>
+            <Header/>
             <Routes/>
         </Container>
 

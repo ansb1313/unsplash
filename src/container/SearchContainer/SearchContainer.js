@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import {Action} from "../../redux/reducer";
 import {useDispatch, useSelector} from "react-redux";
 import PhotoList from "../../components/Photo/PhotoList";
-import SearchBox from "../../components/SearchBox";
 
 const SearchContainer = ({match}) => {
 
@@ -28,7 +27,7 @@ const SearchContainer = ({match}) => {
     return(
 
         <Container>
-            <PhotoList photos={searchResult.results}></PhotoList>
+            <PhotoList photos={searchResult.results}/>
         </Container>
 
     )

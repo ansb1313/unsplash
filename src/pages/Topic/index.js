@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import ListContainer from "../../container/PhotoContainer/ListContainer";
+import TopicContainer from "../../container/TopicContainer/TopicContainer";
 
-const List = (props) => {
+const index = (props) => {
 
     return(
 
         <Container>
-            <ListContainer {...props}></ListContainer>
+            <TopicContainer {...props}></TopicContainer>
         </Container>
 
     )
@@ -20,4 +20,4 @@ const Container = styled.div`
     
 `
 
-export default List;
+export default index;
