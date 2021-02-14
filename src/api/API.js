@@ -1,51 +1,13 @@
-import axios from "axios";
-
+import {fetchJson} from "../lib/Fetch";
 
 const API = {
-
-    getPhotos:(data) => {
-        return(
-            axios.get('https://api.unsplash.com/photos',{
-                params:data
-            })
-        )
-    },
-
-    searchPhotos:(data) => {
-        return(
-            axios.get('https://api.unsplash.com/search/photos',{
-                params:data
-            })
-        )
-    },
-
-    getTopics:(data) => {
-        return(
-            axios.get('https://api.unsplash.com/topics',{
-                params:data
-            })
-        )
-    },
-
-    getTopicPage:(data) => {
-
-        return(
-            axios.get(`https://api.unsplash.com/topics/${data.slug}`,{
-                params:data
-            })
-        )
-    },
-
-    getTopicPhotos:(data) => {
-
-        return(
-            axios.get(`https://api.unsplash.com/topics/${data.slug}/photos`,{
-                params:data
-            })
-        )
-
-    }
-
+    getPhotos:(data) => fetchJson.get('photos', data),
+    searchPhotos:(data) => fetchJson.get('search/photos', data),
+    getCollectionsInSearch:(data) => fetchJson.get('search/collections', data),
+    getUsersInSearch:(data) => fetchJson.get('search/users',data),
+    getTopics:(data) => fetchJson.get('topics', data),
+    getTopicPage:(data, slug) => fetchJson.get(`topics/${slug}`, data),
+    getTopicPhotos:(data, slug) => fetchJson.get(`topics/${slug}/photos`, data),
 }
 
 export default API

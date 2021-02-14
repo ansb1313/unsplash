@@ -3,15 +3,14 @@ import styled from 'styled-components';
 import {GlobalStyle} from "./scss/styled/Reset.Styled";
 import Routes from "./routes/Routes";
 import Header from "./components/Header";
-import Visual from "./components/Visual";
 
 const App = () => {
 
     return(
 
         <Container>
+            <Header></Header>
             <GlobalStyle/>
-            <Header/>
             <Routes/>
         </Container>
 

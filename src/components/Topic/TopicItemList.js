@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import TopicItem from "./TopicItem";
+import Header from "../Header";
 
 const TopicItemList = ({topics}) => {
 
@@ -11,6 +12,7 @@ const TopicItemList = ({topics}) => {
     return(
 
         <Container>
+
             <TextArea>
                 <h1>
                     Topics

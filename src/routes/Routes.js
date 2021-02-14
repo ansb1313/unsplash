@@ -14,7 +14,9 @@ const Routes = () => {
         <Container>
             <Switch>
                 <Route exact path={'/'} component={Home}/>
-                <Route path={"/search/:query"} component={Search}/>
+                <Route path={"/search/photos/:query"} component={Search}/>
+                <Route path={"/search/collections/:query"} component={Search}/>
+                <Route path={"/search/users/:query"} component={Search}/>
                 <Route path={'/topics/:id'} component={Topic}></Route>
                 <Route path={'/topics'} component={ViewAllTopic} />
             </Switch>

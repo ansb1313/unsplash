@@ -1,26 +1,14 @@
-import {call, put, takeLatest} from "@redux-saga/core/effects";
-import {Action} from "./reducer";
-import API from "../api/API";
+import {createStore, applyMiddleware} from "redux";
+import createSagaMiddleware from "redux-saga";
+import {composeWithDevTools} from "redux-devtools-extension";
 
+import reducer from "./reducer";
+import saga from "./saga";
 
-const saga = function* (){
+const sagaMiddleware = createSagaMiddleware();
 
-    takeLatest(Action.Types.GET_PHOTOS, function* ({payload}){
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
 
-        const result = yield call(API.getPhotos, payload);
+sagaMiddleware.run(saga);
 
-        try {
-            if(result.data){
-                yield put(Action.Creators.updateState({
-                    photos: result.data
-                }))
-            }
-        }catch (e) {
-            console.log(e)
-        }
-
-    })
-
-}
-
-export default saga
+export default store

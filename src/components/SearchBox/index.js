@@ -18,7 +18,7 @@ const SearchBox = ({shape}) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        history.push(`/search/${value}`)
+        history.push(`/search/photos/${value}`)
     }
 
     return(

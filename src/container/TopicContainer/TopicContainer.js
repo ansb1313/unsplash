@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import styled from 'styled-components';
-import {useDispatch, useSelector} from "react-redux";
-import {Action} from "../../redux/reducer";
+import {useSelector} from "react-redux";
 import PhotoList from "../../components/Photo/PhotoList";
 import cn from 'classnames'
+import {topicActions} from "../../redux/actionCreators";
 
 const TopicContainer = ({match}) => {
 
@@ -15,39 +15,33 @@ const TopicContainer = ({match}) => {
 
     },[slug])
 
-    const {topicPage} = useSelector(state => state);
-
-    const {topicPhotos} = useSelector(state => state);
-
-    const dispatch = useDispatch()
+    const {topicPage, topicPhotos} = useSelector(state => state.topics);
 
     const getTopicPhotos = () => {
 
-        dispatch(Action.Creators.getTopicPhotos({
-
-            client_id:'LKIzX3g24-Zz7B0pGwMstcPvGcZol7xlWtOprytAPzY',
-            slug,
+        topicActions.getTopicPhotos({
             per_page:12
-
-        }));
+        }, slug);
 
     }
 
     const getTopicPage = () => {
-        dispatch(Action.Creators.getTopicPage({
-            client_id:'LKIzX3g24-Zz7B0pGwMstcPvGcZol7xlWtOprytAPzY',
-            slug
-        }))
+        topicActions.getTopicPage({
+        }, slug)
 
         getTopicPhotos()
-
     }
 
     const conImage = topicPage.top_contributors
 
     if(!topicPage || !conImage) return '...loading';
 
-    console.log('topicPage', topicPage)
+    const setTotalPhotosNumber = (num) => {
+        if(num >= 1000) {
+            return (num / 1000).toFixed(1) + "k"
+        }
+        return num
+    }
 
     return(
         <Container>
@@ -102,7 +96,7 @@ const TopicContainer = ({match}) => {
                            </div>
 
                            <div className="totalPhoto">
-                               <p>{topicPage.total_photos}</p>
+                               <p>{setTotalPhotosNumber(topicPage.total_photos)}</p>
                            </div>
                        </div>
                        <div className="topContributors">
@@ -151,12 +145,14 @@ const Container = styled.div`
 
 const TopicDesc = styled.div`
 
-  max-width: 1000px;
+  max-width: 1200px;
+  padding: 0 10px;
+  box-sizing: border-box;
   margin: 0 auto 80px auto;
   display: flex;
 
   .textArea {
-    width: 60%;
+    width: 66.6666%;
 
     h1 {
       font-size: 42px;
@@ -176,10 +172,11 @@ const TopicDesc = styled.div`
     display: flex;
     justify-content: flex-end;
     flex-wrap: wrap;
-    width: 40%;
-
+    width: 33.3333%;
+    box-sizing: border-box;
+    padding-left: 15px;
     .info {
-      width: 350px;
+      width: 100%;
       border: solid 1px #ddd;
       box-sizing: border-box;
       padding: 20px;
@@ -284,7 +281,7 @@ const TopicDesc = styled.div`
     
     .submit{
       background: #111;
-      width: 350px;
+      width: 100%;
       text-align: center;
       -webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;
       a{

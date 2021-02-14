@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import ListContainer from "../../container/HomeContainer/ListContainer";
+import Header from "../../components/Header";
 
 const Home = (props) => {
 

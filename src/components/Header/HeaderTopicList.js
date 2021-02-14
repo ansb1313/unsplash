@@ -1,8 +1,9 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {useDispatch, useSelector} from "react-redux";
-import {Action} from "../../redux/reducer";
 import {useHistory} from "react-router-dom";
+import {topicActions} from "../../redux/actionCreators";
+import {navigate} from "../../lib/History";
 
 const HeaderTopicList = () => {
 
@@ -11,59 +12,67 @@ const HeaderTopicList = () => {
 
         getTopics()
 
-    },[]);
+    }, []);
 
-    const dispatch = useDispatch();
-
-    const {topics} = useSelector( state => state );
+    const {topics} = useSelector(state => state.topics);
 
     const getTopics = () => {
 
-        dispatch(Action.Creators.getTopics({
+        topicActions.getTopics({
 
-            client_id:'LKIzX3g24-Zz7B0pGwMstcPvGcZol7xlWtOprytAPzY',
-            per_page:30,
+            client_id: 'LKIzX3g24-Zz7B0pGwMstcPvGcZol7xlWtOprytAPzY',
+            per_page: 30,
 
-        }))
-
-    }
-
-    const prevButton = () => {
-
-        const menu = Menu
+        })
 
     }
 
+    const [box, setBox] = useState(0)
+
+    const right = () => {
+        setBox(box+100)
+    }
 
     const history = useHistory()
 
 
-
-
-    return(
-
-        <Container>
+    return (
+        <Container className={"HeaderTopicList"}>
             <Menu>
-                <p onClick={()=>{
+                <p onClick={() => {
                     history.push('/')
                 }}>Editorial</p>
                 <p className={'border'}>Following</p>
             </Menu>
             <Topics>
-                <div className="prev"></div>
-                {
+                <div className="prev" onClick={right}>
+                    <svg width="24" height="24" className="_1A-eG" version="1.1" viewBox="0 0 32 32"
+                         aria-hidden="false">
+                        <path d="M20.6667 24.6666l-2 2L8 16 18.6667 5.3333l2 2L12 16l8.6667 8.6666z"/>
+                    </svg>
+                </div>
+                <ul style={{left:'0px', position:'absolute'}}>
+                    {
 
-                    topics.map((item, index) => (
+                        topics.map((item, index) => (
                             <li key={index}>
-                            <p onClick={()=>{history.push(`/topics/${item.slug}`)}}>{item.title}</p>
+                                <p onClick={() => {
+                                    navigate(`/topics/${item.slug}`)
+                                }}>{item.title}</p>
                             </li>
-                    ))
+                        ))
 
-                }
-                <div className="next"></div>
+                    }
+                </ul>
+                <div className="next">
+                    <svg width="24" height="24" className="_1A-eG" version="1.1" viewBox="0 0 32 32"
+                         aria-hidden="false">
+                        <path d="M11.3333 7.3333l2-2L24 16 13.3333 26.6666l-2-2L20 16l-8.6667-8.6667z"/>
+                    </svg>
+                </div>
             </Topics>
             <AllTopic>
-                <p onClick={()=>{
+                <p onClick={() => {
                     history.push('/topics')
                 }}>
                     View all
@@ -77,24 +86,21 @@ const HeaderTopicList = () => {
 
 const Container = styled.div`
   width: 100%;
-
+  display:flex;
 `
 
 const Menu = styled.div`
   display: flex;
-
   p {
     font-size: 14px;
     white-space: nowrap;
     color: #767676;
     cursor: pointer;
     padding: 10px;
-
   }
 
   .border {
     position: relative;
-
   }
 
   .border::after {
@@ -107,32 +113,43 @@ const Menu = styled.div`
     position: absolute;
     right: 0;
     top: 5px;
-
   }
 `
 
 const Topics = styled.div`
-
   display: flex;
   position: relative;
-  div{
+  overflow:hidden;
+  flex: 1;
+  .prev, 
+  .next {
     position: absolute;
+    display: none ;
+  }
+  
+  .next {
+      right: 0;
   }
 
-  li{
-    font-size: 14px;
-    white-space: nowrap;
-    color: #767676;
-    padding: 10px;
-    p{
-      cursor: pointer;
-    }
-    
+  ul {
+      overflow-x: scroll;
+      display:flex;
+    white-space:nowrap;
+      li{
+        font-size: 14px;
+        white-space: nowrap;
+        color: #767676;
+        padding: 10px;
+        p{
+          cursor: pointer;
+        }
+        
+      }
   }
+  
     
 `
 const AllTopic = styled.div`
-
   p{
     font-size: 14px;
     color: #767676;

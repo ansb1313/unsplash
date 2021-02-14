@@ -1,48 +1,55 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import PhotoItem from "./PhotoItem";
+import {setPhotoGroups} from "../../lib/Common";
 
-const PhotoList = ({photos=[]}) => {
+const PhotoList = ({photos = []}) => {
 
-    return(
+    if(photos.length === 0) return null;
 
+    const photoGroups = setPhotoGroups(photos);
+
+    return (
         <Container>
-            <Row>
+            <GroupRow>
                 {
-                    photos.map((item, index)=>(
-
-                        <Col key={index}>
-                            <PhotoItem {...item}></PhotoItem>
-                        </Col>
-
+                    photoGroups.map((group, groupIndex) => (
+                        <Group key={groupIndex}>
+                            {
+                                group.map((item, index) => (
+                                    <Col key={index}>
+                                        <PhotoItem {...item}/>
+                                    </Col>
+                                ))
+                            }
+                        </Group>
                     ))
                 }
-            </Row>
+            </GroupRow>
         </Container>
-
     )
-
 }
 
 const Container = styled.div`
-
-  max-width: 1000px;
+  max-width: 1200px;
+  box-sizing: border-box;
+  padding: 0 10px;
   margin: 0 auto;
+`
 
-`
-const Row = styled.div`
-    
+const GroupRow = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  margin-left: -15px;
-  margin-right: -15px;
-    
+  margin-left: -12px;
+  margin-right: -12px;    
 `
-const Col = styled.div`
-    
+
+const Group = styled.div`
   width: 33.3333%;
-  padding: 15px;
-    
+`;
+
+const Col = styled.div`
+  padding: 12px;
 `
 
 export default PhotoList;

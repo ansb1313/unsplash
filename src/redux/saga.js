@@ -1,92 +1,16 @@
-import {call, put, takeLatest} from "@redux-saga/core/effects";
-import {Action} from "./reducer";
-import API from "../api/API";
+import {all, call} from 'redux-saga/effects';
+import appSaga from './app/saga';
+import photosSaga from './photos/saga';
+import searchSaga from './search/saga';
+import topicsSaga from './topics/saga';
 
-const saga = function* (){
-
-    yield takeLatest(Action.Types.GET_PHOTOS, function* ({payload}){
-
-        try {
-            const result = yield call(API.getPhotos,payload);
-
-            if(result.data){
-                yield put(Action.Creators.updateState({
-                    photos:result.data
-                }))
-            }
-
-        }catch (e) {
-            console.log(e)
-        }
-
-    });
-
-    yield takeLatest(Action.Types.SEARCH_PHOTOS, function* ({payload}){
-
-        try {
-
-            const result = yield call(API.searchPhotos,payload)
-
-            if(result.data){
-                yield put(Action.Creators.updateState({
-                    searchResult: result.data
-                }))
-            }
-
-        }catch (e) {
-
-            console.log(e)
-
-        }
-
-    })
-
-    yield takeLatest(Action.Types.GET_TOPICS, function* ({payload}){
-
-        try{
-
-            const result = yield call(API.getTopics,payload);
-
-            if(result.data){
-                yield put(Action.Creators.updateState({
-                    topics:result.data
-                }))
-            }
-
-        }catch (e) {
-            console.log(e)
-        }
-
-    });
-
-    yield takeLatest(Action.Types.GET_TOPIC_PAGE, function* ({payload}){
-
-        const result = yield call(API.getTopicPage,payload);
-
-        if(result.data){
-
-            yield put(Action.Creators.updateState({
-                topicPage: result.data
-            }))
-
-        }
-
-    });
-
-    yield takeLatest(Action.Types.GET_TOPIC_PHOTOS, function* ({payload}){
-
-        const result = yield call(API.getTopicPhotos,payload);
-
-        if(result.data){
-
-            yield put(Action.Creators.updateState({
-                topicPhotos: result.data
-            }))
-
-        }
-
-    })
-
+function* saga() {
+    yield all([
+        call(appSaga),
+        call(photosSaga),
+        call(searchSaga),
+        call(topicsSaga)
+    ])
 }
 
-export default saga
+export default saga;
