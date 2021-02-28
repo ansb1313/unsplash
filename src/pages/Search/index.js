@@ -13,7 +13,7 @@ const Search = (props) => {
 
 
 const Container = styled.div`
-    
+  padding-top: 145px;
 `;
 
 export default Search;

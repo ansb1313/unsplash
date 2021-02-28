@@ -13,13 +13,11 @@ const axiosInstance = axios.create({
 })
 
 const request = (method, url, data) => {
-
     try {
         const config = {
             url,
             method,
         }
-
         if(method === fetchConsts.GET) {
             config.params = {
                 client_id: CLIENT_ID,
@@ -28,7 +26,6 @@ const request = (method, url, data) => {
         } else {
             config.data = data;
         }
-
         return axiosInstance(config)
     } catch (e) {
         console.log("@@ e", e)

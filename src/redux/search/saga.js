@@ -9,35 +9,15 @@ function* saga() {
             const result = yield call(API.searchPhotos, payload)
 
             if (result.data) {
+                const {photos, collections, users, related_searches} = result.data;
                 yield put(Action.Creators.updateState({
-                    searchResult: result.data
+                    photos,
+                    collections,
+                    users,
+                    related_searches
                 }))
             }
         }),
-
-        takeLatest(Action.Types.SEARCH_COLLECTIONS, function* ({payload}){
-
-            const result = yield call(API.getCollectionsInSearch, payload)
-
-            if(result.data){
-                yield put(Action.Creators.updateState({
-                    collections:result.data
-                }))
-            }
-
-        }),
-
-        takeLatest(Action.Types.SEARCH_USERS, function* ({payload}){
-
-            const result = yield call(API.getUsersInSearch,payload);
-
-            if(result.data){
-                yield put(Action.Creators.updateState({
-                    users: result.data
-                }))
-            }
-
-        })
     ])
 }
 

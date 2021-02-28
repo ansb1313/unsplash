@@ -15,7 +15,7 @@ const index = (props) => {
 }
 
 const Container = styled.div`
-    
+  padding-top: 145px;
     
     
 `

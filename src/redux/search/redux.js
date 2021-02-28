@@ -1,16 +1,21 @@
 import { createActions, createReducer } from 'reduxsauce';
 
 const initialState = {
-    searchResult: {},
-    collections:[],
-    users:[]
+    photos: {
+        results: []
+    },
+    collections: {
+        results: []
+    },
+    users: {
+        results: []
+    },
+    related_searches: []
 };
 
 export const Action = createActions({
     updateState: ['props'],
     searchPhotos: ['payload'],
-    searchCollections:['payload'],
-    searchUsers:['payload']
 }, {
     prefix: 'SEARCH/'
 })

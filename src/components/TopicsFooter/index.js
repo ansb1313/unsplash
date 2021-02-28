@@ -3,15 +3,15 @@ import styled from 'styled-components';
 import {FaFacebook, FaInstagram, FaTwitter} from "react-icons/fa";
 import {AiFillTwitterCircle, AiOutlineInstagram} from "react-icons/ai";
 import {RiUnsplashFill} from "react-icons/ri";
+import cn from 'classnames'
 
-const TopicFooter = () => {
+const TopicFooter = ({paddingTopValue=''}) => {
 
     return(
 
         <Container>
-           <FooterTop>
+           <FooterTop style={{paddingTop:paddingTopValue}}>
             <Title>Unsplash</Title>
-
             <List>
                 <div className="bottomMenu">
                     <ul>
@@ -63,16 +63,13 @@ const TopicFooter = () => {
 }
 
 const Container = styled.div`
-
-
   padding: 20px 0 70px 0;
   margin: 0 auto;
   width: 1180px;
-    
 `
 
 const FooterTop = styled.div`
-
+  
   border-bottom: solid 1px rgba(0,0,0,0.15);
   box-sizing: border-box;
 

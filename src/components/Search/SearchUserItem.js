@@ -1,32 +1,32 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
+import cn from 'classnames'
+import {navigate} from "../../lib/History";
 
 const SearchUserItem = (props) => {
 
     const [follow, setFollow] = useState(false);
 
-    const {
+    console.log('userProps',props)
 
+    const {
         instagram_username,
         name,
         photos,
-        profile_image
-
+        profile_image,
+        username
     } = props
 
     const onClickFollow = (e) => {
-
         e.preventDefault()
-
+        e.stopPropagation()
         setFollow(!follow)
-
     }
 
     return(
 
         <Container>
-            <div className="contents">
-
+            <div className="contents" onClick={()=>{navigate(`/users/${username}/photos`)}}>
                 <UserId>
                     <div className="profileImage">
                         <img src={profile_image.large} alt=""/>
@@ -36,7 +36,6 @@ const SearchUserItem = (props) => {
                         <p>@{instagram_username}</p>
                     </div>
                 </UserId>
-
                 <UserImageBox>
                     {
                         photos.map((item,index) => (
@@ -44,27 +43,11 @@ const SearchUserItem = (props) => {
                         ))
                     }
                 </UserImageBox>
-
-                <FollowButton onClick={onClickFollow}>
-
+                <FollowButton onClick={onClickFollow} className={cn('followButton', {isActive:follow})} >
                         {
                                 follow
-
                                 ?
-
                                 <div className="following">
-                                    <svg width="18" height="18" version="1.1" viewBox="0 0 32 32"
-                                         aria-hidden="false">
-                                        <path
-                                            d="M23.7 24v2.7H2.3V24c0-3.5 7.1-5.3 10.7-5.3s10.7 1.8 10.7 5.3zM13 16c2.9 0 5.3-2.4 5.3-5.3S15.9 5.3 13 5.3s-5.3 2.4-5.3 5.3S10.1 16 13 16zm14.7-2.7v-4H25v4h-4V16h4v4h2.7v-4h4v-2.7h-4z"></path>
-                                    </svg>
-                                    &nbsp;
-                                    <p>Follow</p>
-                                </div>
-
-                                :
-
-                                <div className="follow">
                                     <svg width="18" height="18" version="1.1" viewBox="0 0 32 32"
                                          aria-hidden="false">
                                         <path
@@ -72,6 +55,16 @@ const SearchUserItem = (props) => {
                                     </svg>
                                     &nbsp;
                                 <p>Following</p>
+                                </div>
+                                :
+                                <div className="follow">
+                                    <svg width="18" height="18" version="1.1" viewBox="0 0 32 32"
+                                    aria-hidden="false">
+                                        <path
+                                        d="M23.7 24v2.7H2.3V24c0-3.5 7.1-5.3 10.7-5.3s10.7 1.8 10.7 5.3zM13 16c2.9 0 5.3-2.4 5.3-5.3S15.9 5.3 13 5.3s-5.3 2.4-5.3 5.3S10.1 16 13 16zm14.7-2.7v-4H25v4h-4V16h4v4h2.7v-4h4v-2.7h-4z"></path>
+                                    </svg>
+                                    &nbsp;
+                                <p>Follow</p>
                             </div>
                         }
                 </FollowButton>
@@ -84,12 +77,9 @@ const SearchUserItem = (props) => {
 }
 
 const Container = styled.div`
-    
-  width: 33.3333%;
-  box-sizing: border-box;
-  padding: 10px;
   
   .contents{
+    cursor: pointer;
     border: solid 1px #ddd;
     -webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;
     box-sizing: border-box;
@@ -189,6 +179,11 @@ const FollowButton = styled.div`
   p{
     color: #797979;
     font-size: 14px;
+  }
+  &.isActive{
+    background: #eee;
+    color: #767676;
+    border: solid 1px #eee;
   }
     
 `

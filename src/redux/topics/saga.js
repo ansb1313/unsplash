@@ -34,11 +34,9 @@ function* saga() {
             const result = yield call(API.getTopicPhotos, payload, slug);
 
             if (result.data) {
-
                 yield put(Action.Creators.updateState({
                     topicPhotos: result.data
                 }))
-
             }
 
         })

@@ -7,22 +7,16 @@ import cn from 'classnames';
 const SearchBox = ({shape}) => {
 
     const history = useHistory()
-
     const [value, setValue] = useState('')
-
     const onChange = (e) => {
-
         setValue(e.target.value)
-
     }
-
     const onSubmit = (e) => {
         e.preventDefault();
         history.push(`/search/photos/${value}`)
     }
 
     return(
-
         <Container className={cn("SearchBox", shape)}>
             <Form onSubmit={onSubmit}>
                 <Button>

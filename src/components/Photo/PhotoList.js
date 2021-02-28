@@ -3,23 +3,30 @@ import styled from 'styled-components';
 
 import PhotoItem from "./PhotoItem";
 import {setPhotoGroups} from "../../lib/Common";
+import {photoActions} from "../../redux/actionCreators";
 
-const PhotoList = ({photos = []}) => {
+const PhotoList = ({data = []}) => {
 
-    if(photos.length === 0) return null;
+    if(data.length === 0) return null;
 
-    const photoGroups = setPhotoGroups(photos);
+    const photoGroups = setPhotoGroups(data);
+
+    const onPopup = (id) => {
+        photoActions.getPhotoById(id)
+    }
 
     return (
         <Container>
-            <GroupRow>
+            <GroupRow className={'groupRow'}>
                 {
                     photoGroups.map((group, groupIndex) => (
-                        <Group key={groupIndex}>
+                        <Group className={'group'} key={groupIndex}>
                             {
                                 group.map((item, index) => (
-                                    <Col key={index}>
-                                        <PhotoItem {...item}/>
+                                    <Col className={'col'} key={index}>
+                                        <PhotoItem {...item}
+                                                   onPopup={onPopup}
+                                        />
                                     </Col>
                                 ))
                             }

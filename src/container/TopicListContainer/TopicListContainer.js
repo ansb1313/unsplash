@@ -15,14 +15,10 @@ const TopicListContainer = () => {
 
     const {topics} = useSelector( state => state.topics);
 
-
     const getTopics = () => {
-
         topicActions.getTopics({
-            client_id:'LKIzX3g24-Zz7B0pGwMstcPvGcZol7xlWtOprytAPzY',
             per_page:30,
         })
-
     }
 
     const [feature, ...allTopics] = topics
@@ -30,8 +26,6 @@ const TopicListContainer = () => {
     if(!topics || !feature){
         return '...loading'
     }
-
-    console.log('ccc',topics);
 
 
     return(

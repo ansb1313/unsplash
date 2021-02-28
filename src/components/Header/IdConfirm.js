@@ -18,7 +18,7 @@ const IdConfirm = () => {
 
 
 const Container = styled.div`
-    padding: 9px 9px;  
+  padding: 9px 9px;  
   background: #111;
   display: flex;
   align-items: center;

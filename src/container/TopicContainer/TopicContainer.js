@@ -20,9 +20,8 @@ const TopicContainer = ({match}) => {
     const getTopicPhotos = () => {
 
         topicActions.getTopicPhotos({
-            per_page:12
+            per_page:12,
         }, slug);
-
     }
 
     const getTopicPage = () => {
@@ -126,10 +125,9 @@ const TopicContainer = ({match}) => {
                    </div>
                </div>
 
-
            </TopicDesc>
 
-           <PhotoList photos={topicPhotos}></PhotoList>
+           <PhotoList data={topicPhotos}></PhotoList>
 
         </Container>
 

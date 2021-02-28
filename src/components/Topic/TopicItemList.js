@@ -7,7 +7,6 @@ const TopicItemList = ({topics}) => {
 
     const [featured, ...allTopics] = topics
 
-    console.log('featured', featured)
 
     return(
 
@@ -30,7 +29,6 @@ const TopicItemList = ({topics}) => {
                 <TopicItem topics={featured}></TopicItem>
 
             </Featured>
-
 
             <AllTopics>
                 <h2>All topics</h2>

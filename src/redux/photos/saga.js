@@ -12,6 +12,20 @@ function* saga() {
                     photos: result.data
                 }))
             }
+        }),
+
+        takeLatest(Action.Types.GET_PHOTO_BY_ID, function* ({id}) {
+            const [photoById, photoRelated] = yield all([call(API.getPhotoById, id), call(API.getPhotoRelated, id)]);
+
+            if (photoById.data) {
+                yield put(Action.Creators.updateState({
+                    photoPopup: {
+                        id,
+                        photo: photoById.data, // photos/id 에서 받아온 데이터
+                        related: photoRelated.data // photos/id/related 에서 받아온 데이터
+                    }
+                }))
+            }
         })
 
     ])

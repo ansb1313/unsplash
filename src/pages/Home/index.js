@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
 import ListContainer from "../../container/HomeContainer/ListContainer";
-import Header from "../../components/Header";
 
 const Home = (props) => {
 
@@ -14,7 +13,7 @@ const Home = (props) => {
 
 
 const Container = styled.div`
-    
+  padding-top: 145px;
 `;
 
 export default Home;

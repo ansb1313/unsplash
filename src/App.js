@@ -2,25 +2,22 @@ import React from 'react';
 import styled from 'styled-components';
 import {GlobalStyle} from "./scss/styled/Reset.Styled";
 import Routes from "./routes/Routes";
-import Header from "./components/Header";
+import HeaderContainer from "./container/HeaderContainer";
+import PhotoPopupContainer from "./container/PhotoPopupContainer";
 
 const App = () => {
 
     return(
-
         <Container>
-            <Header></Header>
+            <HeaderContainer/>
             <GlobalStyle/>
             <Routes/>
+            <PhotoPopupContainer/>
         </Container>
-
     )
-
 }
 
 const Container = styled.div`
-    
-    
     
 `
 
