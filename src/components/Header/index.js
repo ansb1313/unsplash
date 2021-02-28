@@ -73,7 +73,7 @@ const Header = () => {
             </HeaderContainer>
             <BottomMenu>
                 <Route path={["/", '/topics/:id','/topics']} component={HeaderTopicList} exact={true}></Route>
-                <Route path={['/search/photos/:id', '/search/collections/:id', '/search/users/:id']}>
+                <Route path={['/search/:category/:id', '/search/collections/:id', '/search/users/:id']}>
                     <HeaderSearchMenu/>
                 </Route>
             </BottomMenu>
