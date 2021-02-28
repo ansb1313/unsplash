@@ -76,13 +76,6 @@ const Header = () => {
 const Container = styled.div`
     
 `
-const Blank = styled.div`
-    
-  width: 100%;
-  height: 115px;
-  background: mediumslateblue;
-    
-`
 
 const HeaderContainer = styled.div`
     padding: 12px 15px;
