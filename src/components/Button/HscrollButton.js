@@ -4,7 +4,7 @@ import {Link, NavLink} from "react-router-dom";
 import cn from 'classnames';
 import {IconNext, IconPrev} from "../../images/Icons";
 
-const TopicsMenu = ({topics}) => {
+const HscrollButton = ({topics}) => {
 
     const topicItemsRef = useRef(null);
     const trackRef = useRef(null);
@@ -100,37 +100,35 @@ const ButtonLeft = styled.div`
     top: 0;
     bottom: 0;
     z-index: 100;
+    display:flex;
     align-items:center;
     cursor:pointer;
     padding: 0 15px;
     opacity: 0;
     transition: all 0.3s;
-    display: none;
     &.isActive {
-      display:flex;
       opacity: 1;
       background: rgba(255,255,255,0.85);
     }
 `;
 
 const ButtonRight = styled.div`
-    position:absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 100;
-    display:none;
-    align-items:center;
-    cursor:pointer;
-    padding: 0 15px;
-    background:rgba(238,238,238,0.56);
-    opacity: 0;
-    transition: all 0.3s;
-    &.isActive {
-      display:flex;
-      opacity: 1;
-      background: rgba(255,255,255,0.85);
-    }
+  position:absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+  display:flex;
+  align-items:center;
+  cursor:pointer;
+  padding: 0 15px;
+  background:rgba(238,238,238,0.56);
+  opacity: 0;
+  transition: all 0.3s;
+  &.isActive {
+    opacity: 1;
+    background: rgba(255,255,255,0.85);
+  }
 `;
 
-export default TopicsMenu;
+export default HscrollButton;

@@ -1,6 +1,8 @@
 import { createActions, createReducer } from 'reduxsauce';
 
-const initialState = {};
+const initialState = {
+    mode:'light'
+};
 
 export const Action = createActions({
     updateState: ['props'],

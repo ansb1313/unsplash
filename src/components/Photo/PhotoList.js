@@ -5,7 +5,7 @@ import PhotoItem from "./PhotoItem";
 import {setPhotoGroups} from "../../lib/Common";
 import {photoActions} from "../../redux/actionCreators";
 
-const PhotoList = ({data = []}) => {
+const PhotoList = ({data = [], width}) => {
 
     if(data.length === 0) return null;
 
@@ -16,7 +16,7 @@ const PhotoList = ({data = []}) => {
     }
 
     return (
-        <Container>
+        <Container width={width || 1200}>
             <GroupRow className={'groupRow'}>
                 {
                     photoGroups.map((group, groupIndex) => (
@@ -39,7 +39,7 @@ const PhotoList = ({data = []}) => {
 }
 
 const Container = styled.div`
-  max-width: 1200px;
+  max-width:${props => props.width}px;
   box-sizing: border-box;
   padding: 0 10px;
   margin: 0 auto;

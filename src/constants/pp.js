@@ -13,27 +13,22 @@ const TopicsMenu = ({topics}) => {
 
     useEffect(() => {
         if(topicItemsRef.current){
-            topicItemsRef.current.dispatchEvent(new Event('scroll'));
-            // topicItemsRef.current.addEventListener('공격', function (){
-            //     console.log('공격')`1
-            // })
+            topicItemsRef.current.dispatchEvent(new Event('scroll'))
         }
-        // setMaxScroll(Math.floor(trackRef.current.getBoundingClientRect().width - topicItemsRef.current.getBoundingClientRect().width));
-    }, [topics])
+    },[topics])
 
     const onClickLeft = () => {
         topicItemsRef.current.scrollLeft = Math.max(scrollLeft - 200, 0);
     }
-
     const onClickRight = () => {
-        topicItemsRef.current.scrollLeft = Math.min(scrollLeft + 200, maxScroll);
-        // topicItemsRef.current.dispatchEvent(new CustomEvent('공격'))
+        topicItemsRef.current.scrollLeft = Math.min(scrollLeft + 200, maxScroll)
     }
 
     const onScroll = (e) => {
         setScrollLeft(e.target.scrollLeft);
         setMaxScroll(e.target.scrollWidth - e.target.clientWidth)
     }
+
 
     return (
         <Container>
@@ -100,16 +95,17 @@ const ButtonLeft = styled.div`
     top: 0;
     bottom: 0;
     z-index: 100;
+    display:flex;
     align-items:center;
     cursor:pointer;
     padding: 0 15px;
+    transform: translateX(800px) scale(0);
     opacity: 0;
-    transition: all 0.3s;
-    display: none;
+    transition: 1s cubic-bezier(0.68, -0.6, 0.32, 1.6);
     &.isActive {
-      display:flex;
-      opacity: 1;
-      background: rgba(255,255,255,0.85);
+         transform: none;
+         opacity: 1;
+         background:#18f;
     }
 `;
 
@@ -119,17 +115,18 @@ const ButtonRight = styled.div`
     top: 0;
     bottom: 0;
     z-index: 100;
-    display:none;
+    display:flex;
     align-items:center;
     cursor:pointer;
     padding: 0 15px;
     background:rgba(238,238,238,0.56);
+    transform: translateX(-800px) scale(0);
     opacity: 0;
-    transition: all 0.3s;
+    transition: 1s cubic-bezier(0.68, -0.6, 0.32, 1.6);
     &.isActive {
-      display:flex;
-      opacity: 1;
-      background: rgba(255,255,255,0.85);
+         transform: none;
+         opacity: 1;
+         background:#18f;
     }
 `;
 

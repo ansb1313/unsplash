@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import {useHistory} from "react-router-dom";
 import {HiDotsHorizontal} from "react-icons/hi";
@@ -8,10 +8,11 @@ import IdConfirm from "./IdConfirm";
 import {SiUnsplash} from "react-icons/si";
 import SearchBox from "../SearchBox";
 import {CLIENT_ID} from "../../constants";
+import Menus from "./Menus";
 
 const Header = () => {
 
-
+    const [openMenu, setOpenMenu] = useState(false)
     const history = useHistory()
 
     const onClick = () => {
@@ -39,9 +40,10 @@ const Header = () => {
                             </a>
                         </li>
                         <li>
-                            <Button>
+                            <Button onClick={() => setOpenMenu(v => !v)}>
                                 <HiDotsHorizontal/>
                             </Button>
+                            <Menus openMenu={openMenu} />
                         </li>
                     </ul>
                 </Gnb>
@@ -74,11 +76,12 @@ const Header = () => {
 }
 
 const Container = styled.div`
-    
+        position: relative;
+        z-index: 500;
 `
 
 const HeaderContainer = styled.div`
-    padding: 12px 15px;
+      padding: 12px 15px;
       display: flex;
       justify-content: space-between;
       width: 100%;  
@@ -150,7 +153,7 @@ const Gnb = styled.div`
       align-items: center;
       
       li{
-        
+        position: relative;
         margin:0 10px;
         
         svg{

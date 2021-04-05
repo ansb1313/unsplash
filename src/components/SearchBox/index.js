@@ -15,11 +15,15 @@ const SearchBox = ({shape}) => {
         e.preventDefault();
         history.push(`/search/photos/${value}`)
     }
+    const onClick = (e) => {
+        e.preventDefault();
+        history.push(`/search/photos/${value}`)
+    }
 
     return(
         <Container className={cn("SearchBox", shape)}>
             <Form onSubmit={onSubmit}>
-                <Button>
+                <Button onClick={onClick}>
                     <svg width="32" height="32" className="_3cOFI _2Jh5K _2_G8g" version="1.1" viewBox="0 0 32 32"
                          aria-hidden="false">
                         <path

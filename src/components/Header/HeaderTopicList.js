@@ -1,12 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import {useDispatch, useSelector} from "react-redux";
-import {Link, NavLink, useHistory} from "react-router-dom";
+import {useSelector} from "react-redux";
+import { NavLink,} from "react-router-dom";
 import TopicsMenu from "./TopicsMenu";
 
 const HeaderTopicList = () => {
 
     const {topics} = useSelector(state => state.topics);
+
+    // const title = topics?.map((item, i)=>{
+    //    return item.title
+    // })
+    //
+    // const titleLength = title.slice(0,title.indexOf('Hisstory')+1).length || title?.length
 
     return (
         <Container className={"HeaderTopicList"}>
@@ -16,6 +22,7 @@ const HeaderTopicList = () => {
                     Following
                 </MenuItem>
             </Menu>
+            {/*<TopicsMenu topics={topics?.slice(0,titleLength)}/>*/}
             <TopicsMenu topics={topics}/>
             <AllTopic>
                 <MenuItem activeClassName={'linkStyle'} to={'/topics'} exact={true}>

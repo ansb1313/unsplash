@@ -1,10 +1,9 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import PhotoPopup from "../../components/PhotoPopup";
 import {useSelector} from "react-redux";
 import {photoActions} from "../../redux/actionCreators";
-import PopupHeader from "../../components/PhotoPopup/PopupHeader";
 
 const PhotoPopupContainer = () => {
 
@@ -17,6 +16,7 @@ const PhotoPopupContainer = () => {
             photoPopup: {}
         })
     }
+
     // onPopup은 Photolist에
 
     return ReactDOM.createPortal(

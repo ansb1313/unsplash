@@ -29,14 +29,10 @@ const TopicListContainer = () => {
 
 
     return(
-
         <Container>
-
             <TopicItemList topics={topics}/>
             <TopicFooter/>
-
         </Container>
-
     )
 
 }

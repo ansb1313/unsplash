@@ -5,7 +5,7 @@ import {useHistory} from "react-router-dom";
 
 const TopicItem = ({topics}) => {
 
-    const bgImage = topics.cover_photo.urls.regular;
+    const bgImage = topics?.cover_photo?.urls.regular;
 
     const bgStyle = {
         backgroundImage:`url(${bgImage}`,
@@ -27,31 +27,28 @@ const TopicItem = ({topics}) => {
                 <CoverBox style={bgStyle}>
                     <div className={cn('status', topics.status)}>
                         <div className='circle'></div>
-                        <p>{topics.status}</p>
+                        <p>{topics?.status}</p>
                     </div>
                 </CoverBox>
                 <TextArea>
                     <div className="logo">
-                        <h1>{topics.title} <br/><span>by {topics.owners[0].name}</span></h1>
+                        <h1>{topics?.title} <br/><span>by {topics?.owners[0].name}</span></h1>
 
-                        <img src={topics.owners[0].profile_image.large} alt=""/>
+                        <img src={topics?.owners[0].profile_image?.large} alt=""/>
                     </div>
                     <div className="desc">
-                        <p>{topics.description}</p>
+                        <p>{topics?.description}</p>
                     </div>
 
                     <div className="contribution">
                         <svg>
                             <path d="M26.7 4H5.3C4.5 4 4 4.5 4 5.3v21.3c0 .9.5 1.4 1.3 1.4h21.3c.8 0 1.3-.5 1.3-1.3V5.3c.1-.8-.4-1.3-1.2-1.3zm-20 20l4.7-6 3.3 4 4.7-6 6 8H6.7z"></path>
                         </svg>
-                        <p>{topics.total_photos} contribution</p>
+                        <p>{topics?.total_photos} contribution</p>
                     </div>
-
-
                 </TextArea>
             </TopicBox>
         </Container>
-
     )
 
 }

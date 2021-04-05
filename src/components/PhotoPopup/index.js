@@ -8,7 +8,10 @@ import SearchCollectionItem from "../Search/SearchCollectionItem";
 import Tags from "../tags";
 import {PhotoItemHeartIcon, PhotoItemPlusIcon, PopupDownIcon} from "../../images/Icons";
 import cn from "classnames";
-import {photoActions} from "../../redux/actionCreators";
+import {Overlay} from "../Layout/Layout.styled";
+import {appActions} from "../../redux/actionCreators";
+
+const headerOffset = 50;
 
 const PhotoPopup = ({onClose}) => {
 
@@ -17,6 +20,10 @@ const PhotoPopup = ({onClose}) => {
     const searchCollections = (item, index) => <SearchCollectionItem {...item} key={index}/>
 
     const [activeButton, setActiveButton] = useState(false)
+    const [fixedHeader, setFixedHeader] = useState(false)
+    const [scrollTrackTop, setScrollTrackTop] = useState(false)
+
+    if(!photoPopup) return 'loading'
 
     const onClickStopEvent = (e) => {
         e.stopPropagation();
@@ -26,22 +33,21 @@ const PhotoPopup = ({onClose}) => {
         setActiveButton(!activeButton)
     }
 
-    const [scrollTrackTop, setScrollTrackTop] = useState(false)
-
-    const scl = () => {
-        let trackScrollValue = document.querySelector('.scrollTrack').scrollTop;
-        if(trackScrollValue>90){
-            setScrollTrackTop(true)
+    const scl = (e) => {
+        if(e.target.scrollTop > headerOffset){
+            setFixedHeader(true)
         }else{
-            setScrollTrackTop(false)
+            setFixedHeader(false)
         }
     }
 
+
     return (
         <Container>
-            <BackGround onClick={onClose} />
-            <ScrollTrack className={cn('scrollTrack',{isActive:scrollTrackTop})} onClick={(e)=>{onClickStopEvent(e)}} onScroll={scl}>
-                <ScrollHeader>
+            <Overlay onClick={onClose} alpha={0.6} />
+            <ScrollTrack className={cn('scrollTrack',{isActive:scrollTrackTop, fixedHeader})}
+                         onClick={(e)=>{onClickStopEvent(e)}} onScroll={scl}>
+                <ScrollHeader onClick={()=> appActions.updateState({mode:'dark'})}>
                     <div className="userId">
                         <img src={photoPopup.photo.user.profile_image.small} alt=""/>
                         <div className="name">
@@ -85,59 +91,56 @@ const PhotoPopup = ({onClose}) => {
 }
 
 
-const Container = styled.div`
-    position:fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1200;
-  box-sizing: border-box;
-  padding-top: 50px;
-`;
 
-const BackGround = styled.div`
-  position:fixed;
+const Container = styled.div`
+  position: fixed;
   top: 0;
   left: 0;
-  right: 0;
   bottom: 0;
-  background:rgba(0,0,0,0.6);
-  z-index: -1;
-`
+  right: 0;
+  z-index: 1200;
+  box-sizing: border-box;
+`;
+
 
 const ScrollTrack = styled.div`
-    height: 95vh;
+    position: relative;
+    padding-top: ${headerOffset + 64}px;
+    height: 100%;
     overflow-y: auto;
     width: 1150px;
     margin: 0 auto;
     border-radius: 6px;
-    position: relative;
-    transition: all 0.2s;
-    &.isActive{
-      transition: all 0.2s;
-      top: -50px;
-      height: 100vh;
-    }
+    height: 100%;
   //transform: translateX(-50%);
 `;
 
 const ScrollHeader = styled.div`
-  position: fixed;
+  background: #fff;
+  position: absolute;
+  top: ${headerOffset}px;
   z-index: 800;
   margin: 0 auto;
   width: 1150px;
-  background: #fff;
   box-sizing: border-box;
   padding: 15px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  
+  background: ${props => props.theme[props.theme.mode].popupHeader};
+  
+  .fixedHeader &{
+    position: fixed;
+    top:0 ;
+    margin:0 auto;
+  }
   .userId {
     display: flex;
     align-items: center;
     img {
       border-radius: 100%;
+      display: block;
     }
     .name {
       width: 150px;
@@ -224,7 +227,7 @@ const ScrollHeader = styled.div`
 
 const Contents = styled.div`
     background:#fff;
-  padding-top: 30px;
+    position: relative;
 `;
 
 const CollectionList = styled.div`

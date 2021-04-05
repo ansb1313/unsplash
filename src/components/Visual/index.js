@@ -4,8 +4,6 @@ import SearchBox from "../SearchBox";
 
 const Visual = ({randomPhoto}) => {
 
-    console.log('visual',randomPhoto)
-
     const bgStyle = {
         backgroundImage:`url(${randomPhoto?.urls.full})`,
         backgroundRepeat:'no-repeat',

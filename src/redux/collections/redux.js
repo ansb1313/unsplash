@@ -7,7 +7,8 @@ const initialState = {
 
 export const Action = createActions({
     updateState:['props'],
-    getCollectionPhotos:['id']
+    getCollectionPhotos:['payload', 'id'],
+    getCollectionData:['id']
 },{
     prefix:'COLLECTION/'
 });

@@ -1,17 +1,22 @@
-import {takeLatest, all, call, put} from 'redux-saga/effects';
+import {takeLatest, all, call, put, select} from 'redux-saga/effects';
 import {Action} from "./redux";
 import API from "../../api/API";
 
 function* saga() {
     yield all([
         takeLatest(Action.Types.GET_PHOTOS, function* ({payload}) {
+            yield put(Action.Creators.updateState({isLoading: true}))
+            const prevPhotos = yield select(state => state.photos.photos)
             const result = yield call(API.getPhotos, payload);
-
             if (result.data) {
                 yield put(Action.Creators.updateState({
-                    photos: result.data
+                    photos: [
+                        ...prevPhotos, //처음엔 빈배열
+                        ...result.data
+                    ]
                 }))
             }
+            yield put(Action.Creators.updateState({isLoading:false}))
         }),
 
         takeLatest(Action.Types.GET_PHOTO_BY_ID, function* ({id}) {
