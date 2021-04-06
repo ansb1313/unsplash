@@ -42,20 +42,22 @@ const RelatedItems = ({related_searches}) => {
             <LeftButton onClick={onClickLeft} className={cn({isActive: scrollLeft > 0 })}>
                 <IconPrev/>
             </LeftButton>
+
             <RightButton onClick={onClickRight} className={cn({isActive: scrollLeft < maxScroll})}>
                 <IconNext/>
             </RightButton>
-                <RelatedSearchItems ref={itemsRef} onScroll={onScroll}>
-                    <ItemContainer className={'itemList'}>
-                            {
-                                related_searches?.map((item, index)=>(
-                                    <RelatedItem to={`/search/photos/${item.title}`} key={index}>
-                                        {item.title}
-                                    </RelatedItem>
-                                ))
-                            }
-                    </ItemContainer>
-                </RelatedSearchItems>
+
+            <RelatedSearchItems ref={itemsRef} onScroll={onScroll}>
+                <ItemContainer className={'itemList'}>
+                        {
+                            related_searches?.map((item, index)=>(
+                                <RelatedItem to={`/search/photos/${item.title}`} key={index}>
+                                    {item.title}
+                                </RelatedItem>
+                            ))
+                        }
+                </ItemContainer>
+            </RelatedSearchItems>
         </Container>
     )
 }
@@ -68,13 +70,11 @@ const Container = styled.div`
   overflow: hidden;
 `
 const RelatedSearchItems = styled.div`
-  position: relative;
-  height: 90px;
-  overflow: scroll;
-  width: max-content;
+  overflow: auto;
 `
 const ItemContainer = styled.div`
   display: flex;
+  height: 90px;
   width: max-content;
   transition: left 0.2s;
 `
@@ -93,7 +93,7 @@ const RelatedItem = styled(NavLink)`
   padding-bottom: 2px;
   font-size: 13px;
   color: #777;
-  transition: 0.2s;
+  transition:all 0.2s;
 
   &:hover {
     border: solid 1px #444;
@@ -110,38 +110,44 @@ const RelatedItem = styled(NavLink)`
   }
 `
 const LeftButton = styled.div`
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   z-index: 900;
   cursor: pointer;
-  border: solid 1px #111;
+  border: solid 1px #fff;
   position: absolute;
   background:rgba(255,255,255,0.8);
   width: 45px;
   height: 37px;
   left: 0;
   top: 0;
+  opacity:0;
+  transition: all 0.2s;
   &.isActive {
     opacity: 1;
+    display: flex;
     background: rgba(255,255,255,0.85);
   }
 `
 const RightButton = styled.div`
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   z-index: 900;
   cursor: pointer;
-  border: solid 1px #111;
+  border: solid 1px #fff;
   position: absolute;
   background:rgba(255,255,255,0.8);
   width: 45px;
   height: 37px;
   right: 0;
   top: 0;
+  opacity: 0;
+  transition: all 0.2s;
   &.isActive {
     opacity: 1;
+    display: flex;
     background: rgba(255,255,255,0.85);
   }
 `
