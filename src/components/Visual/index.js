@@ -1,8 +1,27 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import SearchBox from "../SearchBox";
+import {useSelector} from "react-redux";
+import {searchActions} from "../../redux/actionCreators";
 
 const Visual = ({randomPhoto}) => {
+
+    // useEffect(()=>{
+    //     getWallPaper()
+    // },[])
+    //
+    // const photo = useSelector(state=>state.search.photos)
+    //
+    // const getWallPaper = () => {
+    //     searchActions.searchPhotos({
+    //         query:'wallpaper',
+    //         orientation:'landscape',
+    //         per_page:20
+    //     })
+    // }
+    //
+    // let photoLength = photo?.results.length + 1;
+    // let randomPhoto = photo?.results[Math.floor(Math.random()*photoLength)]
 
     const bgStyle = {
         backgroundImage:`url(${randomPhoto?.urls.full})`,

@@ -12,14 +12,13 @@ const ListContainer = ({location}) => {
     const photo = useSelector(state=>state.search.photos)
     const [page, setPage] = useState(1)
 
-    // const qsValues = qs.parse(location.search, {ignoreQueryPrefix: true})
-    //
-    // const page = Number(qsValues.page) || 1;
-
     useEffect(()=>{
         getPhotos()
-        getWallPaper()
     },[page])
+
+    useEffect(()=>{
+        getWallPaper()
+    },[])
 
     const getPhotos = () => {
         photoActions.getPhotos({
@@ -28,38 +27,19 @@ const ListContainer = ({location}) => {
         })
     }
 
-    const getWallPaper = () => {
+    const getWallPaper = useCallback(() => {
         searchActions.searchPhotos({
             query:'wallpaper',
             orientation:'landscape',
             per_page:20
         })
-    }
+    },[])
 
-    let photoLength = photo?.results.length + 1;
-    let randomPhoto = photo?.results[Math.floor(Math.random()*photoLength)]
 
-    // const cb = (entries, observer) => {
-    //     entries.forEach(entry => {
-    //         if(entry.isIntersecting){
-    //             console.log('inView')
-    //         }else {
-    //             console.log('outView')
-    //         }
-    //     })
-    // }
-    //
-    // let observer = new IntersectionObserver(cb,{
-    //     threshold:0.1
-    // })
-    //
-    // useEffect(()=>{
-    //     if(sentinelRef.current){
-    //         observer.observe(sentinelRef.current)
-    //     }
-    // },[])
-    //
-    // const sentinelRef = useRef()
+    let VisualPhoto = photo?.results && [photo?.results[4],photo?.results[7],photo?.results[8],photo?.results[9],
+        photo?.results[12], photo?.results[15],photo?.results[18],photo?.results[19]];
+    let photoLength = VisualPhoto?.length;
+    let randomPhoto = VisualPhoto[Math.floor(Math.random()*photoLength)] || photo?.results[12];
 
     let observer;
 
