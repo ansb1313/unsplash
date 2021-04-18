@@ -41,7 +41,7 @@ const TopicsMenu = ({ topics }) => {
                 <IconPrev />
             </ButtonLeft>
 
-            <ButtonRight onClick={onClickRight} className={cn({ isActive: scrollLeft + 200 < maxScroll })}>
+            <ButtonRight onClick={onClickRight} className={cn({ isActive: scrollLeft + 10 < maxScroll })}>
                 <IconNext />
             </ButtonRight>
 
