@@ -1,69 +1,68 @@
-import React, {useEffect, useRef, useState} from 'react'
-import styled, {css} from 'styled-components';
-import {Link, NavLink} from "react-router-dom";
-import cn from 'classnames';
-import {IconNext, IconPrev} from "../../images/Icons";
+import React, { useEffect, useRef, useState } from "react";
+import styled, { css } from "styled-components";
+import { Link, NavLink } from "react-router-dom";
+import cn from "classnames";
+import { IconNext, IconPrev } from "../../images/Icons";
 
-const TopicsMenu = ({topics}) => {
-
+const TopicsMenu = ({ topics }) => {
     const topicItemsRef = useRef(null);
     const trackRef = useRef(null);
     const [scrollLeft, setScrollLeft] = useState(0);
     const [maxScroll, setMaxScroll] = useState(0);
 
     useEffect(() => {
-        if(topicItemsRef.current){
-            topicItemsRef.current.dispatchEvent(new Event('scroll'));
+        if (topicItemsRef.current) {
+            topicItemsRef.current.dispatchEvent(new Event("scroll"));
             // topicItemsRef.current.addEventListener('공격', function (){
             //     console.log('공격')`1
             // })
         }
         // setMaxScroll(Math.floor(trackRef.current.getBoundingClientRect().width - topicItemsRef.current.getBoundingClientRect().width));
-    }, [topics])
+    }, [topics]);
 
     const onClickLeft = () => {
         topicItemsRef.current.scrollLeft = Math.max(scrollLeft - 200, 0);
-    }
+    };
 
     const onClickRight = () => {
         topicItemsRef.current.scrollLeft = Math.min(scrollLeft + 200, maxScroll);
         // topicItemsRef.current.dispatchEvent(new CustomEvent('공격'))
-    }
+        console.log("scrollLeft", scrollLeft);
+    };
 
     const onScroll = (e) => {
         setScrollLeft(e.target.scrollLeft);
-        setMaxScroll(e.target.scrollWidth - e.target.clientWidth)
-    }
+        setMaxScroll(e.target.scrollWidth - e.target.clientWidth);
+    };
 
     return (
         <Container>
-            <ButtonLeft onClick={onClickLeft} className={cn({isActive: scrollLeft > 0 })}>
-                <IconPrev/>
+            <ButtonLeft onClick={onClickLeft} className={cn({ isActive: scrollLeft > 0 })}>
+                <IconPrev />
             </ButtonLeft>
 
-            <ButtonRight onClick={onClickRight} className={cn({isActive: scrollLeft < maxScroll})}>
-                <IconNext/>
+            <ButtonRight onClick={onClickRight} className={cn({ isActive: scrollLeft + 200 < maxScroll })}>
+                <IconNext />
             </ButtonRight>
 
             <TopicItems ref={topicItemsRef} onScroll={onScroll}>
                 <Track ref={trackRef}>
-                    {
-                        topics.map((topic, i) => {
-                            return(
-                                <TopicItem activeClassName={'topicItemStyle'} to={`/topics/${topic.slug}`} key={i}>{topic.title}</TopicItem>
-                            )
-                        })
-                    }
+                    {topics.map((topic, i) => {
+                        return (
+                            <TopicItem activeClassName={"topicItemStyle"} to={`/topics/${topic.slug}`} key={i}>
+                                {topic.title}
+                            </TopicItem>
+                        );
+                    })}
                 </Track>
             </TopicItems>
         </Container>
-    )
-}
-
+    );
+};
 
 const Container = styled.div`
-    position:relative;
-    overflow:hidden;
+    position: relative;
+    overflow: hidden;
     flex: 1;
 `;
 
@@ -72,8 +71,8 @@ const TopicItems = styled.div`
 `;
 
 const Track = styled.div`
-   display:flex; 
-   width: max-content;
+    display: flex;
+    width: max-content;
 `;
 
 const TopicItem = styled(NavLink)`
@@ -95,41 +94,41 @@ const TopicItem = styled(NavLink)`
 `;
 
 const ButtonLeft = styled.div`
-    position:absolute;
+    position: absolute;
     left: 0;
     top: 0;
     bottom: 0;
     z-index: 100;
-    align-items:center;
-    cursor:pointer;
+    align-items: center;
+    cursor: pointer;
     padding: 0 15px;
     opacity: 0;
     transition: all 0.3s;
     display: none;
     &.isActive {
-      display:flex;
-      opacity: 1;
-      background: rgba(255,255,255,0.85);
+        display: flex;
+        opacity: 1;
+        background: rgba(255, 255, 255, 0.85);
     }
 `;
 
 const ButtonRight = styled.div`
-    position:absolute;
+    position: absolute;
     right: 0;
     top: 0;
     bottom: 0;
     z-index: 100;
-    display:none;
-    align-items:center;
-    cursor:pointer;
+    display: none;
+    align-items: center;
+    cursor: pointer;
     padding: 0 15px;
-    background:rgba(238,238,238,0.56);
+    background: rgba(238, 238, 238, 0.56);
     opacity: 0;
     transition: all 0.3s;
     &.isActive {
-      display:flex;
-      opacity: 1;
-      background: rgba(255,255,255,0.85);
+        display: flex;
+        opacity: 1;
+        background: rgba(255, 255, 255, 0.85);
     }
 `;
 
